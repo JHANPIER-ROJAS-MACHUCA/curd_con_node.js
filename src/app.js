@@ -7,16 +7,17 @@ const app = express();
 
 const proveedorRoutes = require('./routes/proveedorRoutes');
 
-// Middleware para JSON
 app.use(express.json());
 
-// Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rutas API
+// Ruta raíz
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.use('/api', proveedorRoutes);
 
-// Puerto dinámico para Render
 const PORT = process.env.PORT || 3127;
 
 app.listen(PORT, () => {
