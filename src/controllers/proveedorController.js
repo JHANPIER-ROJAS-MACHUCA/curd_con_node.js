@@ -1,50 +1,58 @@
 const db = require('../config/db');
 
 // LISTAR
-exports.obtenerProveedores = (req, res) => {
-    db.query('SELECT * FROM proveedor', (err, results) => {
-        if (err) return res.status(500).json(err);
-        res.json(results);
-    });
+exports.obtenerProveedores = async (req, res) => {
+    const { data, error } = await db
+        .from('proveedor')
+        .select('*');
+
+    if (error) return res.status(500).json(error);
+
+    res.json(data);
 };
 
 // CREAR
-exports.crearProveedor = (req, res) => {
+exports.crearProveedor = async (req, res) => {
     const { razonsocial, direccion, telefono } = req.body;
 
-    const sql = 'INSERT INTO proveedor (razonsocial, direccion, telefono) VALUES (?, ?, ?)';
+    const { data, error } = await db
+        .from('proveedor')
+        .insert([{ razonsocial, direccion, telefono }])
+        .select();
 
-    db.query(sql, [razonsocial, direccion, telefono], (err, result) => {
-        if (err) return res.status(500).json(err);
+    if (error) return res.status(500).json(error);
 
-        res.json({
-            mensaje: 'Proveedor registrado',
-            id_proveedor: result.insertId
-        });
+    res.json({
+        mensaje: 'Proveedor registrado',
+        data
     });
 };
 
 // ACTUALIZAR
-exports.actualizarProveedor = (req, res) => {
+exports.actualizarProveedor = async (req, res) => {
     const { id } = req.params;
     const { razonsocial, direccion, telefono } = req.body;
 
-    const sql = 'UPDATE proveedor SET razonsocial=?, direccion=?, telefono=? WHERE id_proveedor=?';
+    const { error } = await db
+        .from('proveedor')
+        .update({ razonsocial, direccion, telefono })
+        .eq('id_proveedor', id);
 
-    db.query(sql, [razonsocial, direccion, telefono, id], (err, result) => {
-        if (err) return res.status(500).json(err);
+    if (error) return res.status(500).json(error);
 
-        res.json({ mensaje: 'Proveedor actualizado' });
-    });
+    res.json({ mensaje: 'Proveedor actualizado' });
 };
 
 // ELIMINAR
-exports.eliminarProveedor = (req, res) => {
+exports.eliminarProveedor = async (req, res) => {
     const { id } = req.params;
 
-    db.query('DELETE FROM proveedor WHERE id_proveedor=?', [id], (err, result) => {
-        if (err) return res.status(500).json(err);
+    const { error } = await db
+        .from('proveedor')
+        .delete()
+        .eq('id_proveedor', id);
 
-        res.json({ mensaje: 'Proveedor eliminado' });
-    });
+    if (error) return res.status(500).json(error);
+
+    res.json({ mensaje: 'Proveedor eliminado' });
 };
