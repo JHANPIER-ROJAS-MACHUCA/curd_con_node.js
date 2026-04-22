@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Formulario */
+form {
+    background: #ffffff;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+input {
+    flex: 1;
+    min-width: 180px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Botón guardar */
+form button {
+    background: #007bff;
+    color: white;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+/* Tabla */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+}
+
+table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+table tr:hover {
+    background: #f9f9f9;
+}
+
+/* Botones acciones */
+table button {
+    margin: 2px;
+    padding: 8px 12px;
+}
+
+table button:first-child {
+    background: #28a745;
+    color: white;
+}
+
+table button:first-child:hover {
+    background: #1e7e34;
+}
+
+table button:last-child {
+    background: #dc3545;
+    color: white;
+}
+
+table button:last-child:hover {
+    background: #a71d2a;
+}
